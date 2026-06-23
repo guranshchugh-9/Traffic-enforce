@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+/* ─── Design System Tokens ─────────────────────────────────── */
+:root {
+  /* Color primitives */
+  --color-white: #ffffff;
+  --color-black: #0a0a0a;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Accent (blush — used sparingly) */
+  --accent-from: #fca5a5;
+  --accent-to: #fcd34d;
+  --accent-gradient: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  --accent-subtle: linear-gradient(135deg, rgba(252, 165, 165, 0.12), rgba(252, 211, 77, 0.08));
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Borders */
+  --border-default: 1px solid var(--color-gray-200);
+  --border-strong: 1px solid var(--color-gray-300);
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --shadow-elevated: 0 2px 8px rgba(0, 0, 0, 0.08), 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.10), 0 12px 32px rgba(0, 0, 0, 0.08);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@theme inline {
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ─── Base Reset ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-black);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  min-height: 100dvh;
+  margin: 0;
+}
+
+/* ─── Typography ───────────────────────────────────────────── */
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, 'Cascadia Code', 'Source Code Pro', monospace;
+  font-feature-settings: 'tnum' 1, 'lnum' 1;
+}
+
+/* ─── Accent Gradient Utilities ────────────────────────────── */
+.accent-gradient {
+  background: var(--accent-gradient);
+}
+
+.accent-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.accent-subtle-bg {
+  background: var(--accent-subtle);
+}
+
+/* ─── Dotted Texture Background ────────────────────────────── */
+.texture-dots {
+  background-image: radial-gradient(circle, var(--color-gray-300) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.texture-dots-subtle {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ─── Grid Line Background ─────────────────────────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(var(--color-gray-100) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-gray-100) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-grid-subtle {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ─── Card Styles ──────────────────────────────────────────── */
+.card {
+  background: var(--color-white);
+  border: var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-elevated);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-elevated);
+}
+
+/* ─── Pipeline Stage Connector ─────────────────────────────── */
+.stage-connector {
+  width: 1px;
+  background: var(--color-gray-200);
+  flex: 1;
+  min-height: 20px;
+}
+
+/* ─── Status Indicators ─────────────────────────────────────── */
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 1; }
+  70% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.status-processing {
+  animation: pulse-ring 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* ─── Progress Bar ──────────────────────────────────────────── */
+@keyframes progress-shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.progress-shimmer {
+  background: linear-gradient(90deg, var(--color-gray-200) 25%, var(--color-gray-100) 37%, var(--color-gray-200) 63%);
+  background-size: 400px 100%;
+  animation: progress-shimmer 1.4s ease infinite;
+}
+
+/* ─── Confidence Bar Fill ───────────────────────────────────── */
+@keyframes fill-bar {
+  from { width: 0%; }
+  to { width: var(--fill-width, 0%); }
+}
+
+.confidence-fill {
+  animation: fill-bar 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: var(--fill-delay, 0ms);
+}
+
+/* ─── Image Crossfade ───────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.image-fadeIn {
+  animation: fadeIn 300ms ease-out forwards;
+}
+
+/* ─── Slide Up ──────────────────────────────────────────────── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-up {
+  animation: slideUp 350ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideUpDelay {
+  0%, 30% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-400);
+}
+
+/* ─── Selection ─────────────────────────────────────────────── */
+::selection {
+  background: rgba(252, 165, 165, 0.25);
+  color: var(--color-black);
+}
+
+/* ─── Focus ─────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-gray-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Upload Drop Zone ──────────────────────────────────────── */
+@keyframes border-dash {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: 24; }
+}
+
+.drop-active {
+  border-color: var(--color-gray-400) !important;
+  background: rgba(252, 165, 165, 0.03) !important;
+}
+
+/* ─── Number Counter ─────────────────────────────────────────  */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
