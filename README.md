@@ -21,6 +21,9 @@ TrafficEnforcer_Submission/
 
 The runnable component is the `frontend/` app. The `models/` folders contain research code, training scripts, and references to model weights.
 
+![Traffic Enforcer Platform Dashboard](https://4sy3dr5w6m.ufs.sh/f/6viMwy9ydt9pYZNOHgqVOLDw9CjirtyHnP27z43cK0JSXAlW)
+
+
 ## Frontend stack & scripts
 
 - Next.js 16, React 19, TypeScript
